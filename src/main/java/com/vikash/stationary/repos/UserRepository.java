@@ -7,5 +7,5 @@ import com.vikash.stationary.entities.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, Integer> {
-
+	User findByEmail(String email);
 }
