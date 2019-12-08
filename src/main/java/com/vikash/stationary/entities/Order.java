@@ -1,14 +1,17 @@
 package com.vikash.stationary.entities;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
 
+	public enum Status{Placed,Delievered,Cancelled,Shipped,Returned,Refund_Proccessed,Refunded,Out_for_Delivery,Applied_for_Exchange,Exchanged};
 	private long id;
-	private List<Product> products;
+	private Map<Status, HashSet<Product>> products;
 	private Date date;
-	private User user;
+	private String userId;
 	
 	public long getId() {
 		return id;
@@ -16,23 +19,25 @@ public class Order {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public User getUser() {
-		return user;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+	public Map<Status, HashSet<Product>> getProducts() {
+		return products;
+	}
+	public void setProducts(Map<Status, HashSet<Product>> products) {
+		this.products = products;
+	}
+
 	
 }

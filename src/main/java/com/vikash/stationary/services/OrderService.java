@@ -8,5 +8,5 @@ import com.vikash.stationary.entities.User;
 public interface OrderService {
 	
 	public List<Order> findAllOrderByUser(User user);
-
+	
 }

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.vikash.stationary.entities.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
+
+	User findByEmail(String username);
+	User findByMobile(String mobile);
 
 }
