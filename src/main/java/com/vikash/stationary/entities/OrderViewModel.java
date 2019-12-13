@@ -1,7 +1,5 @@
 package com.vikash.stationary.entities;
 
-import com.vikash.stationary.entities.Order.Status;
-
 public class OrderViewModel {
 
 	private long id;

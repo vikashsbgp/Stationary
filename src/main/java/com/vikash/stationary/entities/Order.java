@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Order {
 
-	public enum Status{Placed,Delievered,Cancelled,Shipped,Returned,Refund_Proccessed,Refunded,Out_for_Delivery,Applied_for_Exchange,Exchanged};
 	private long id;
 	private Map<Status, HashSet<Product>> products;
 	private Date date;
