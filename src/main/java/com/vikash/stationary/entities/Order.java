@@ -1,23 +1,19 @@
 package com.vikash.stationary.entities;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
-public class Order {
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
-	private long id;
-	private Map<Status, HashSet<Product>> products;
+@Entity
+public class Order extends AbstractEntity {
+
+	@OneToOne
+	private ProductStatus productStatus;
 	private Date date;
-	private String userId;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	@OneToOne
+	private User user;
 	
 	public Date getDate() {
 		return date;
@@ -25,17 +21,18 @@ public class Order {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getUserId() {
-		return userId;
+	
+	public ProductStatus getProductStatus() {
+		return productStatus;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setProductStatus(ProductStatus productStatus) {
+		this.productStatus = productStatus;
 	}
-	public Map<Status, HashSet<Product>> getProducts() {
-		return products;
+	public User getUser() {
+		return user;
 	}
-	public void setProducts(Map<Status, HashSet<Product>> products) {
-		this.products = products;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	

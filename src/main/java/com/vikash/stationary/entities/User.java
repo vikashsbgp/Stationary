@@ -1,37 +1,38 @@
 package com.vikash.stationary.entities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Document(collection = "Users")
-public class User {
+@Entity
+@Table(name = "users")
+public class User extends AbstractEntity {
 
-	@Id
-	private String id;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String email;
 	private String mobile;
+	
+	@OneToOne
 	private Address address;
+	
+	@OneToOne
 	private Cart cart;
-	private String roles;
 	private int active;
-	private String permissions;
 
-	public String getId() {
+	@ManyToMany
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
 
-		return id;
-	}
-
-	public void setId(String id) {
-
-		this.id = id;
-	}
+	@ManyToMany
+	@JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
+	private Set<Permission> permissions;
 
 	public String getFirstName() {
 
@@ -83,51 +84,6 @@ public class User {
 		this.mobile = mobile;
 	}
 
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
-	}
-
-	public String getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(String permissions) {
-		this.permissions = permissions;
-	}
-
-	public List<String> getRolesList() {
-
-		if (this.roles.length() > 0) {
-			return Arrays.asList(this.roles.split(","));
-		} else
-			return new ArrayList<>();
-
-	}
-
-	public List<String> getPermissionList() {
-
-		if (this.roles.length() > 0) {
-			return Arrays.asList(this.permissions.split(","));
-		} else
-			return new ArrayList<>();
-
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ ", email=" + email + ", mobile=" + mobile + ", roles=" + roles + ", active=" + active
-				+ ", permissions=" + permissions + "]";
-	}
-
 	public Address getAddress() {
 		return address;
 	}
@@ -142,6 +98,29 @@ public class User {
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", email=" + email
+				+ ", mobile=" + mobile + ", roles=" + getRoles() + ", active=" + active + ", permissions="
+				+ getPermissions() + "]";
 	}
 
 }

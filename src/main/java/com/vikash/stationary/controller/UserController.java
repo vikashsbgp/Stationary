@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vikash.stationary.entities.User;
 import com.vikash.stationary.repos.UserRepository;
-import com.vikash.stationary.services.NextSequenceService;
 
 @RestController
 public class UserController {
@@ -22,14 +21,11 @@ public class UserController {
 	UserRepository userRepository;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-	@Autowired
-	private NextSequenceService nextSequenceService;
 
 	@PostMapping("/user")
 	@ResponseBody
 	public User registerUser(@RequestBody User user) {
 		if(user.getEmail()!=null && user.getPassword()!=null) {
-			user.setId("USER-00"+nextSequenceService.getNextSequence("customSequences"));
 			user.setPassword(encoder.encode(user.getPassword()));
 			user=userRepository.save(user);
 		}

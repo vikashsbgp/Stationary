@@ -41,6 +41,7 @@ public class ProductController {
 		
 	}
 	
+	
 	@GetMapping("/search/{filter}")
 	public List<Product> getSearchedProducts(@PathVariable("filter") String name) {
 		

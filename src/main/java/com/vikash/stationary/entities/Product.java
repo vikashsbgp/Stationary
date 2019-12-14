@@ -1,26 +1,16 @@
 package com.vikash.stationary.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
 
-@Document(collection = "Product")
-public class Product {
+@Entity
+public class Product extends AbstractEntity {
 
-	@Id
-	private long id;
 	private String name;
 	private String description;
 	private String brand;
 	private double price;
 	private int quantity;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

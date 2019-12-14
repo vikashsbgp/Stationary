@@ -1,6 +1,9 @@
 package com.vikash.stationary.entities;
 
-public class Address {
+import javax.persistence.Entity;
+
+@Entity
+public class Address extends AbstractEntity {
 	
 	private String street;
 	private String city;

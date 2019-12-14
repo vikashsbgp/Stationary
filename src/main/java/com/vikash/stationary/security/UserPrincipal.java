@@ -1,15 +1,15 @@
 package com.vikash.stationary.security;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.vikash.stationary.entities.User;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class UserPrincipal implements UserDetails {
 
@@ -25,13 +25,13 @@ public class UserPrincipal implements UserDetails {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        this.user.getPermissionList().forEach(p -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority(p);
+        this.user.getPermissions().forEach(p -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority(p.getName());
             authorities.add(authority);
         });
 
-        this.user.getRolesList().forEach(r -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+        this.user.getRoles().forEach(r -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r.getName());
             authorities.add(authority);
         });
         return authorities;
